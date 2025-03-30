@@ -11,3 +11,5 @@
 6. npm install --save-dev nodemon
 
 7. server.js
+
+8. npm run dev
