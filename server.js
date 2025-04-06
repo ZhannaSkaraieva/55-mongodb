@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = 3000
-const { MongoClient } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 //деструктурирующее присваивание и импортирует MongoClient из библиотеки mongodb.
 //const mongodb = require("mongodb");
 //const MongoClient = mongodb.MongoClient;
@@ -11,7 +11,16 @@ app.use(express.json());
 // Replace the uri string with your connection string. 
 const uri = "mongodb+srv://Zhanna:Pass123@cluster0.z9uldgm.mongodb.net/usersbox?retryWrites=true&w=majority&appName=Cluster0";
 // Адрес базы данных
-const client = new MongoClient(uri); //создаем обект клиента с параметром URL для дальнейшего подсоединения
+
+
+const client = new MongoClient(uri,  {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    }
+); //создаем обект клиента с параметром URL для дальнейшего подсоединения
 
 async function run() {//создаем асинхрон.функцию для подключения к БД
     const myDB = client.db("usersbox");
